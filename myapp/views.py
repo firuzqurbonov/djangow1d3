@@ -7,7 +7,7 @@ from .forms import CategoryForm, ProductForm, CustomerForm, SignUpForm
 
 
 
-# Регистрация
+
 def register_view(request):
     if request.user.is_authenticated:
         return redirect('home') 
@@ -23,7 +23,7 @@ def register_view(request):
         form = SignUpForm()
     return render(request, 'form.html', {'form': form, 'title': 'Регистрация аккаунта'})
 
-# Вход (Login)
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('home') 
@@ -37,7 +37,7 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'form.html', {'form': form, 'title': 'Вход в аккаунт'})
 
-# Выход (Logout)
+
 def logout_view(request):
     logout(request)
     return redirect('login')
@@ -49,7 +49,7 @@ def logout_view(request):
 def home(request):
     return render(request, 'home.html')
 
-# Category CRUD
+
 @login_required(login_url='login')
 def category_list(request):
     categories = Category.objects.all()
@@ -91,7 +91,7 @@ def category_delete(request, pk):
         return redirect('category_list')
     return render(request, 'confirm_delete.html', {'object': category})
 
-# Product CRUD
+
 @login_required(login_url='login')
 def product_list(request):
     products = Product.objects.all()
@@ -133,7 +133,7 @@ def product_delete(request, pk):
         return redirect('product_list')
     return render(request, 'confirm_delete.html', {'object': product})
 
-# Customer CRUD
+
 @login_required(login_url='login')
 def customer_list(request):
     customers = Customer.objects.all()
