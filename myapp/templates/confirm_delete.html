@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение удаления</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #080711; color: #f8fafc; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .delete-card { background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 20px; padding: 2.5rem; max-width: 450px; text-align: center; box-shadow: 0 0 30px rgba(239, 68, 68, 0.15); }
+        h2 { font-size: 1.4rem; color: #f8fafc; margin-bottom: 1.5rem; line-height: 1.4; }
+        .object-name { color: #ef4444; font-weight: 700; }
+        .btn-del { width: 100%; background: #ef4444; color: white; padding: 0.8rem; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        .btn-del:hover { background: #dc2626; transform: translateY(-2px); }
+        .cancel-link { display: block; margin-top: 1rem; color: #94a3b8; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="delete-card">
+        <h2>Вы действительно хотите удалить <br><span class="object-name">"{{ object }}"</span>?</h2>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-del">Да, удалить навсегда</button>
+        </form>
+        <a href="javascript:history.back()" class="cancel-link">Отмена</a>
+    </div>
+</body>
+</html>

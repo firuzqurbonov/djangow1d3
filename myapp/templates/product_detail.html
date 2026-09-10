@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><title>{{ product.name }}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background: #080711; color: #f8fafc; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 2rem; }
+        .card { background: rgba(17, 24, 39, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2.5rem; max-width: 500px; width: 100%; }
+        h2 { font-size: 2rem; color: #38bdf8; margin-bottom: 1rem; }
+        p { color: #94a3b8; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .price { font-size: 2rem; color: #a855f7; font-weight: 800; margin: 1.5rem 0; }
+        .back-btn { display: inline-block; color: #38bdf8; text-decoration: none; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>{{ product.name }}</h2>
+        <p><b>Описание:</b> {{ product.description|default:"Нет описания" }}</p>
+        <p><b>В наличии:</b> {{ product.quantity }} шт.</p>
+        <div class="price">${{ product.price }}</div>
+        <a href="{% url 'product_list' %}" class="back-btn">&larr; Назад к товарам</a>
+    </div>
+</body>
+</html>

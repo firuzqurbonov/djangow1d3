@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиенты | ApexCode</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #080711; color: #f8fafc; min-height: 100vh; padding: 2rem; }
+        .header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto 3rem auto; }
+        h1 { font-size: 2.2rem; background: linear-gradient(135deg, #38bdf8, #6366f1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .btn { background: linear-gradient(135deg, #38bdf8, #6366f1); color: white; padding: 0.8rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; box-shadow: 0 0 15px rgba(56,189,248,0.4); }
+        .btn-home { background: transparent; border: 1px solid rgba(255,255,255,0.2); box-shadow: none; margin-right: 1rem; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .card { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; transition: 0.3s; }
+        .card:hover { border-color: #38bdf8; transform: translateY(-4px); }
+        .card-name { font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; }
+        .card-info { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.2rem; }
+        
+        .actions { display: flex; gap: 0.5rem; }
+        .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none; font-weight: 500; text-align: center; flex: 1; }
+        .btn-view { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+        .btn-edit { background: rgba(250, 204, 21, 0.15); color: #facc15; }
+        .btn-delete { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <a href="{% url 'home' %}" class="btn btn-home">&larr; Главная</a>
+            <h1 style="display:inline-block;">База Клиентов</h1>
+        </div>
+        <a href="{% url 'customer_create' %}" class="btn">+ Новый клиент</a>
+    </div>
+
+    <div class="grid">
+        {% for item in customers %}
+        <div class="card">
+            <div class="card-name">👤 {{ item.name }}</div>
+            <div class="card-info">📞 {{ item.phone }}</div>
+            <div class="actions">
+                <a href="{% url 'customer_detail' item.pk %}" class="btn-sm btn-view">Профиль</a>
+                <a href="{% url 'customer_update' item.pk %}" class="btn-sm btn-edit">Изменить</a>
+                <a href="{% url 'customer_delete' item.pk %}" class="btn-sm btn-delete">Удалить</a>
+            </div>
+        </div>
+        {% empty %}
+        <p style="color: #94a3b8;">Клиентов пока нет.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
